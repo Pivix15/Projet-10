@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 const Layouts = () => {
     return (
-        <div className="layout">
+        <div className="layout"> {/* ne sert peut être a rien */}
             <Header/>
             <Outlet/>
             <Footer/>
