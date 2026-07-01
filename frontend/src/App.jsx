@@ -2,6 +2,7 @@ import '@/scss/App.css'
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Layouts, Home } from '@/pages'
 import Login from './pages/Login'
+import User from './pages/User'
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
         <Route element={<Layouts />}>
           <Route index element={<Home />} />
           <Route path='/sign-in' element={<Login />} />
+          <Route path='/user' element={<User />} />
         </Route>
       </Routes>
     </BrowserRouter>
