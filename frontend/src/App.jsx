@@ -1,20 +1,18 @@
 import '@/scss/App.css'
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { Layouts, Home } from '@/pages'
-import Login from './pages/Login'
-import User from './pages/User'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import PublicRouter from '@/pages/Public/PublicRouter'
+import AdminRouter from '@/pages/Admin/AdminRouter'
+
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layouts />}>
-          <Route index element={<Home />} />
-          <Route path='/sign-in' element={<Login />} />
-          <Route path='/user' element={<User />} />
-        </Route>
+        <Route path='/*' element={<PublicRouter/>} />
+        <Route path='/admin/*' element={<AdminRouter/>} />
       </Routes>
+      
     </BrowserRouter>
   )
 }
