@@ -1,22 +1,42 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { loginSuccess } from '@/store/authSlice';
 
 const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const [errorMessage, setErrorMessage] = useState('')
+
 
     const onSubmit = (e) => {
         e.preventDefault() //évite le rechargement de la page
+
+        if (!email || !password) {
+            setErrorMessage("Veuillez remplir tous les champs")
+            return
+        }
 
         fetch('http://localhost:3001/api/v1/user/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.body.token)
-        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                if (data.body && data.body.token) {
+                    dispatch(loginSuccess(data.body.token)) //stock le token dans redux
+                    navigate('/admin')
+                } else {
+                    setErrorMessage("Email ou mot de passe incorrect")
+                }
+            })
+            .catch(err => console.log(err))
     }
 
     return (
@@ -24,7 +44,8 @@ const Login = () => {
             <section className="sign-in-content">
                 <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
-                <form>
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                <form onSubmit={onSubmit}>
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>
                         <input type="text" id="username" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -37,7 +58,7 @@ const Login = () => {
                         <input type="checkbox" id="remember-me" />
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
-                    <button className="sign-in-button" onClick={onSubmit}>Sign In</button>
+                    <button className="sign-in-button" type="submit">Sign In</button>
                 </form>
             </section>
         </main>

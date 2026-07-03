@@ -1,9 +1,10 @@
+import { useSelector } from "react-redux"; // lire les données dans le store
 import { Navigate } from "react-router-dom";
 
 const AuthGuard = ({children}) => {
-    let logged = false
+    const { isLogged } = useSelector(state => state.auth)
 
-    if(!logged) {
+    if(!isLogged) {
         return <Navigate to='/sign-in'/>
     }
 
