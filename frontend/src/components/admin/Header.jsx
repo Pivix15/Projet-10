@@ -8,10 +8,11 @@ const Header = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const isLogged = useSelector((state) => state.auth.isLogged);
 
     const isLogout = () => {
         dispatch(logout())
+        localStorage.removeItem('token')
         navigate('/sign-in')
     }
 
@@ -22,7 +23,7 @@ const Header = () => {
                 <h1 className="sr-only">Argent Bank</h1>
             </Link>
             <div>
-                {isAuthenticated ? (
+                {isLogged ? (
                     <button className="main-nav-item" onClick={isLogout}>
                         <i className="fa fa-sign-out"></i>
                         Sign Out
@@ -33,7 +34,6 @@ const Header = () => {
                         Sign In
                     </Link>
                 )}
-                <button onClick={isLogout}>Logout</button>
             </div>
         </nav>
     );

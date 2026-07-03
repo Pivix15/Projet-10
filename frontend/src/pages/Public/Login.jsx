@@ -12,6 +12,7 @@ const Login = () => {
 
     const [errorMessage, setErrorMessage] = useState('')
 
+    const [rememberMe, setRememberMe] = useState(false)
 
     const onSubmit = (e) => {
         e.preventDefault() //évite le rechargement de la page
@@ -31,6 +32,12 @@ const Login = () => {
                 console.log(data)
                 if (data.body && data.body.token) {
                     dispatch(loginSuccess(data.body.token)) //stock le token dans redux
+
+                    if (rememberMe) {
+                        console.log('Remember est coché, saugarde du token...')
+                        localStorage.setItem('token', data.body.token)
+                    }
+
                     navigate('/admin')
                 } else {
                     setErrorMessage("Email ou mot de passe incorrect")
@@ -55,7 +62,7 @@ const Login = () => {
                         <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <div className="input-remember">
-                        <input type="checkbox" id="remember-me" />
+                        <input type="checkbox" id="remember-me" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
                     <button className="sign-in-button" type="submit">Sign In</button>
