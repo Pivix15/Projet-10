@@ -66,9 +66,35 @@ body {
   color: #42b983;
 }
 
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-user p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.header-user p:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.header-user div {
+  display: flex;
+}
+
 .main-nav-item {
+  display: flex;
+  gap: 0.3rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
   text-decoration: none;
-  margin-right: 0.5rem;
+  font-size: 1rem;
 }
 
 .main-nav-item:hover {

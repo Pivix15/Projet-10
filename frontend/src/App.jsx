@@ -4,7 +4,7 @@ import PublicRouter from '@/pages/Public/PublicRouter'
 import AdminRouter from '@/pages/Admin/AdminRouter'
 import AuthGuard from '@/_helpers/AuthGuard'
 import { useDispatch } from 'react-redux'
-import { loginSuccess } from './store/authSlice'
+import { loginSuccess, setUser } from './store/authSlice'
 
 
 function App() {
@@ -13,6 +13,18 @@ function App() {
   const token = localStorage.getItem('token')
   if (token) {
     dispatch(loginSuccess(token))
+
+    fetch('http://localhost:3001/api/v1/user/profile', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(res => res.json())
+    .then(profile => {
+      dispatch(setUser(profile.body.firstName))
+    })
   }
 
   return (

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { loginSuccess } from '@/store/authSlice';
+import { loginSuccess, setUser } from '@/store/authSlice';
 
 const Login = () => {
 
@@ -37,6 +37,15 @@ const Login = () => {
                         console.log('Remember est coché, saugarde du token...')
                         localStorage.setItem('token', data.body.token)
                     }
+
+                    fetch('http://localhost:3001/api/v1/user/profile', {
+                        method: 'POST',
+                        headers: { Authorization: `Bearer ${data.body.token}` }
+                    })
+                    .then(res => res.json())
+                    .then(profile => {
+                        dispatch(setUser(profile.body.firstName))
+                    })
 
                     navigate('/admin')
                 } else {
