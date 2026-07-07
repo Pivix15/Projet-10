@@ -44,10 +44,13 @@ const Login = () => {
                     })
                     .then(res => res.json())
                     .then(profile => {
-                        dispatch(setUser(profile.body.firstName))
+                        console.log(profile.body)
+                        dispatch(setUser({
+                            firstName: profile.body.firstName,
+                            lastName: profile.body.lastName
+                        }))
+                        navigate('/admin')
                     })
-
-                    navigate('/admin')
                 } else {
                     setErrorMessage("Email ou mot de passe incorrect")
                 }

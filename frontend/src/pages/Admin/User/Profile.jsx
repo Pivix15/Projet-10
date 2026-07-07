@@ -1,9 +1,13 @@
+import { useSelector } from 'react-redux'
 
 const Profile = () => {
+    const firstName = useSelector((state) => state.auth.firstName)
+    const lastName = useSelector((state) => state.auth.lastName)
+
     return (
         <main className="main bg-dark">
             <div className="header">
-                <h1>Welcome back<br />Tony Jarvis!</h1>
+                <h1>Welcome back<br />{firstName} {lastName}!</h1>
                 <button className="edit-button">Edit Name</button>
             </div>
             <h2 className="sr-only">Accounts</h2>
