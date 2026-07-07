@@ -21,21 +21,24 @@ function App() {
         Authorization: `Bearer ${token}`
       }
     })
-    .then(res => res.json())
-    .then(profile => {
-      dispatch(setUser(profile.body.firstName))
-    })
+      .then(res => res.json())
+      .then(profile => {
+        dispatch(setUser({
+          firstName: profile.body.firstName,
+          lastName: profile.body.lastName
+        }))
+      })
   }
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/*' element={<PublicRouter/>} />
+        <Route path='/*' element={<PublicRouter />} />
         <Route path='/admin/*' element={
           <AuthGuard>
             <AdminRouter />
           </AuthGuard>
-        }/>
+        } />
       </Routes>
     </BrowserRouter>
   )
