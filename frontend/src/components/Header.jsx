@@ -26,7 +26,9 @@ const Header = () => {
             <div>
                 {isLogged ? (
                     <div className="header-user">
-                        <p><i className="fa fa-user-circle"></i>{firstName}</p>
+                        <Link to='/admin'>
+                            <p><i className="fa fa-user-circle"></i>{firstName}</p>
+                        </Link>
                         <button className="main-nav-item" onClick={isLogout}>
                             <i className="fa fa-sign-out"></i>
                             <span className="main-nav-text">Sign Out</span>
