@@ -31,7 +31,7 @@ const Login = () => {
             .then(data => {
                 console.log(data)
                 if (data.body && data.body.token) {
-                    dispatch(loginSuccess(data.body.token)) //stock le token dans redux
+                    dispatch(loginSuccess(data.body.token))
 
                     if (rememberMe) {
                         console.log('Remember est coché, saugarde du token...')

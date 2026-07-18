@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux"; // lire les données dans le store
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 const AuthGuard = ({children}) => {
