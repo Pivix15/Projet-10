@@ -42,15 +42,16 @@ const Login = () => {
                         method: 'POST',
                         headers: { Authorization: `Bearer ${data.body.token}` }
                     })
-                    .then(res => res.json())
-                    .then(profile => {
-                        console.log(profile.body)
-                        dispatch(setUser({
-                            firstName: profile.body.firstName,
-                            lastName: profile.body.lastName
-                        }))
-                        navigate('/admin')
-                    })
+                        .then(res => res.json())
+                        .then(profile => {
+                            console.log(profile.body)
+                            dispatch(setUser({
+                                firstName: profile.body.firstName,
+                                lastName: profile.body.lastName
+                            }))
+                            navigate('/admin')
+                        })
+                        .catch(err => console.log(err))
                 } else {
                     setErrorMessage("Email ou mot de passe incorrect")
                 }

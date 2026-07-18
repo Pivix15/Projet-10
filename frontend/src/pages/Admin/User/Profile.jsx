@@ -39,6 +39,7 @@ const Profile = () => {
                 }))
                 setEditing(false)
             })
+            .catch(err => console.log(err))
     }
 
     return (
