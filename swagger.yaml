@@ -169,7 +169,7 @@ paths:
           name: id
           type: string
           required: true
-          description: Account unique identifier
+          description: Transaction unique identifier
         - in: body
           name: body
           description: Transaction data to create
@@ -252,33 +252,6 @@ paths:
           description: Transaction not found
         '500':
           description: Internal Server Error
-    delete:
-        security:
-          - Bearer: []
-        tags:
-          - Transactions Module
-        summary: Delete Transaction API
-        description: API for deleting a transaction
-        parameters:
-          - in: header
-            name: Authorization
-            type: string
-            description: Attach Bearer JWT token
-            required: true
-          - in: path
-            name: id
-            type: string
-            required: true
-            description: ID of the transaction
-        produces:
-          - application/json
-        responses:
-          '204':
-           description: Transaction deleted successfully
-          '404':
-            description: Transaction not found
-          '500':
-            description: Internal Server Error
 
 securityDefinitions:
   Bearer:
